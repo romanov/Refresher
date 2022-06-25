@@ -32,5 +32,9 @@ app.MapGet("/update", async () =>
 PowerShell Core on target machine.
 https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.2
 
+## Future
+[] Fully functional background service
+[] PowerShell checks for errors
+
 ## Tested
 [+] Ubuntu 20.04.4 LTS
