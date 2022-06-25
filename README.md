@@ -15,7 +15,7 @@ This service will generate an update script for your app and run it via PowerShe
 app.MapGet("/update", async () =>
 {
     var provider = builder.Services.BuildServiceProvider();
-    var updater = provider.GetService<IRefresher>();
+    var updater = provider.GetService<RefresherService>();
     await updater.UpdateAsync("https://example.com/update1.zip");
     return Results.Ok();
 });
@@ -29,9 +29,11 @@ app.MapGet("/update", async () =>
 4. The update script will start your app again.
 
 ## Requirements
-PowerShell Core on target machine.
+PowerShell Core on target machine (> 7.2.4)
 https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.2
+
 First start of your app via `nohup dotnet app.dll > /dev/null 2>&1 &`
+
 Correct user rights for the main app and the folders.
 
 ## Future
@@ -40,4 +42,5 @@ Correct user rights for the main app and the folders.
 - [ ] Function to create minimal updates
 
 ## Tested
-[+] Ubuntu 20.04.4 LTS
+- [x] Ubuntu 20.04.4 LTS
+- [x] Windows 11 (10.0.22000.0)
