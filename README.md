@@ -3,9 +3,13 @@ This service will generate an update script for your app and run it via PowerShe
 
 # Quick Start
 1. Add nuget to your project
+
 `Install-Package Refresher -Version 1.0.0`
+
 2. Add service to the app
+
 `builder.Services.AddSingleton<IRefresher>();`
+
 3. Inject the service or get it directly
 ```
 app.MapGet("/update", async () =>
@@ -16,7 +20,13 @@ app.MapGet("/update", async () =>
     return Results.Ok();
 });
 ```
-4. Ivoke it via `http://yourapp.com/update`
+4. Invoke it via `http://yourapp.com/update`
+
+## How it works
+1. Your app will generate an update script in folder.
+2. Your app will invoke PowerShell CLI.
+3. PowerShell will shutdown your app, download and unpack the update, replace old files with new files.
+4. The update script will start your app again.
 
 ## Requirements
 PowerShell Core on target machine.
