@@ -31,8 +31,8 @@ app.MapGet("/update", async () =>
 ## Requirements
 PowerShell Core on target machine.
 https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.2
-
-Firs start of your app via `nohup dotnet app.dll > /dev/null 2>&1 &`
+First start of your app via `nohup dotnet app.dll > /dev/null 2>&1 &`
+Correct user rights for the main app and the folders.
 
 ## Future
 - [ ] Fully functional background service
