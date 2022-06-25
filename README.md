@@ -10,7 +10,7 @@ This service will generate an update script for your app and run it via PowerShe
 
 `builder.Services.AddSingleton<RefresherService>();`
 
-3. Inject the service or get it directly
+3. Inject the service or invoke it directly
 ```
 app.MapGet("/update", async () =>
 {
@@ -29,15 +29,20 @@ app.MapGet("/update", async () =>
 4. The update script will start your app again.
 
 ## Requirements
-PowerShell Core on target machine (> 7.2.4)
+PowerShell Core on target machine (> 7.2)
 https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.2
 
 First start of your app via `nohup dotnet app.dll > /dev/null 2>&1 &`
 
 Correct user rights for the main app and the folders.
 
+## Why PowerShell intead of some custom daemon
+1. PowerShell is available on all platforms.
+2. Your app generates and starts the update process.
+3. No overhead for additional process.
+
 ## Future
-- [ ] Fully functional background service
+- [ ] Fully functional background service with manifest files
 - [ ] PowerShell checks for errors
 - [ ] Function to create minimal updates
 
