@@ -1,17 +1,19 @@
 ﻿using System.Diagnostics;
 using System.Management.Automation;
+using System.Reflection;
 
 namespace Refresher;
 
 public static class PowershellWorker
 {
 
-    static string CreateUpdateScript(string folderPath, int processId, string updateLink)
+    static string CreateUpdateScript(string folderPath, string assemblyName, int processId, string updateLink)
     {
 
         string script = @$"# We don't need progress bars to consume CPU
 $ProgressPreference = 'SilentlyContinue'
 # Stopping the current app
+$appDll = '{assemblyName}.dll'
 Stop-Process -Id {processId} -Force
 $appFolder = '{folderPath}'
 Set-Location -Path $appFolder
@@ -30,7 +32,7 @@ Invoke-WebRequest -Uri $source -OutFile $updateZipPath
 Expand-Archive -Path $updateZipPath -DestinationPath $appFolder -Force
 # Cleaning
 Remove-Item -Path $updateZipPath
-Start-Process -FilePath 'dotnet' -ArgumentList 'Barba.dll'";
+Start-Process -FilePath 'dotnet' -ArgumentList $appDll";
 
 
         return script;
@@ -47,7 +49,7 @@ Start-Process -FilePath 'dotnet' -ArgumentList 'Barba.dll'";
     {
         // TODO...check update archieve
 
-
+        var assemblyName = Assembly.GetEntryAssembly().GetName().Name;
         // Current process for shutdown
         var procId = Process.GetCurrentProcess().Id;
         // Root directory of the App
@@ -55,7 +57,7 @@ Start-Process -FilePath 'dotnet' -ArgumentList 'Barba.dll'";
         // Update script will be here
         var filePath = Path.Combine(directory, "update.ps1");
 
-        await File.WriteAllTextAsync(filePath, CreateUpdateScript(directory, procId, updateLink));
+        await File.WriteAllTextAsync(filePath, CreateUpdateScript(directory, assemblyName, procId, updateLink));
 
         return filePath;
     }

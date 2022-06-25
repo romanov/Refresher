@@ -4,7 +4,7 @@ This service will generate an update script for your app and run it via PowerShe
 # Quick Start
 1. Add nuget to your project
 
-`Install-Package Refresher -Version 1.0.0`
+`Install-Package Refresher`
 
 2. Add service to the app
 
