@@ -8,7 +8,7 @@ This service will generate an update script for your app and run it via PowerShe
 
 2. Add service to the app
 
-`builder.Services.AddSingleton<IRefresher>();`
+`builder.Services.AddSingleton<RefresherService>();`
 
 3. Inject the service or get it directly
 ```
