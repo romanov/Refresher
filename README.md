@@ -36,7 +36,7 @@ First start of your app via `nohup dotnet app.dll > /dev/null 2>&1 &`
 
 Correct user rights for the main app and the folders.
 
-## Why PowerShell intead of some custom daemon
+## Why PowerShell instead of some custom update daemon
 1. PowerShell is available on all platforms.
 2. Your app generates and starts the update process.
 3. No overhead for additional process.
