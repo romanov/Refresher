@@ -11,6 +11,9 @@ This service will generate an update script for your app and run it via PowerShe
 `builder.Services.AddSingleton<RefresherService>();`
 
 3. Inject the service or invoke it directly
+
+C# (service)
+
 ```
 app.MapGet("/update", async () =>
 {
@@ -20,6 +23,22 @@ app.MapGet("/update", async () =>
     return Results.Ok();
 });
 ```
+
+F# (direct, minimal API)
+
+```
+app.MapGet("/update", Func<IResult>(fun () ->
+
+       task {
+            let updater = new RefresherService()
+            updater.UpdateAsync("https://example.com/update1.zip")  |> ignore
+       }  |> ignore
+
+       Results.Ok()
+
+    )) |> ignore
+```
+
 4. Invoke it via `http://yourapp.com/update`
 
 ## How it works
