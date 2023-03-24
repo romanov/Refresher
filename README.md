@@ -1,5 +1,5 @@
 # Refresher
-This service will generate an update script for your app and run it via PowerShell Core.
+This service will generate an update script for your app and run it via PowerShell Core from the app itself.
 
 # Quick Start
 1. Add nuget to your project
